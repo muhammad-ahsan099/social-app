@@ -1,0 +1,130 @@
+import {StyleSheet} from 'react-native';
+import colors from '../../../services/colors';
+import {mvs} from '../../../services/metrices';
+
+export const Styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  body: {
+    //flex: 1,
+    paddingHorizontal: mvs(20),
+    backgroundColor: colors.background,
+  },
+  imageStyle: {
+    borderRadius: mvs(97),
+    height: mvs(400),
+    position: 'absolute',
+    top: mvs(-110),
+    right: 0,
+    left: 0,
+    borderBottomStartRadius: mvs(100),
+  },
+  infoContainer: {
+    borderRadius: mvs(54),
+  },
+  subImage: {
+    borderRadius: mvs(8),
+    height: mvs(111),
+    width: mvs(84),
+    marginTop: mvs(-45),
+  },
+  superFanBtn: {
+    height: mvs(28),
+    marginTop: 0,
+    backgroundColor: colors.lightgrey1,
+    width: mvs(100),
+    paddingHorizontal: mvs(5),
+    marginHorizontal: mvs(5),
+  },
+  addBtn: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.white,
+    width: mvs(41),
+    height: mvs(26),
+    borderRadius: mvs(17),
+    marginLeft: mvs(6),
+  },
+  tabView: {
+    alignSelf: 'center',
+    backgroundColor: colors.lightBlack,
+    height: mvs(35),
+    borderRadius: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: mvs(40),
+    marginHorizontal: mvs(40),
+    marginBottom: mvs(10),
+  },
+  selectedTabButton: {
+    backgroundColor: colors.lightgrey1,
+    width: '33%',
+    borderRadius: 12,
+    height: mvs(35),
+    marginTop: 0,
+  },
+  unSelectedTabButton: {
+    backgroundColor: colors.lightBlack,
+    width: '33%',
+    height: mvs(35),
+    marginTop: 0,
+    borderRadius: 12,
+  },
+  whiteText: {
+    color: colors.white,
+    fontSize: 13,
+    fontWeight: '500',
+  },
+  grayText: {
+    color: colors.lightgrey1,
+    fontSize: 13,
+    fontWeight: '500',
+  },
+  videItem: {
+    flex: 1,
+    borderWidth: 0.3,
+    borderColor: colors.white,
+    height: mvs(182),
+    justifyContent: 'space-between',
+    padding: mvs(8),
+  },
+  header_back: {
+    marginTop: mvs(20),
+    alignItems: 'center',
+    paddingHorizontal: mvs(16),
+  },
+  bottomTab: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: mvs(15),
+    marginHorizontal: mvs(-20),
+    marginBottom: mvs(3),
+  },
+  active: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: mvs(7),
+    borderBottomColor: colors.white,
+    borderBottomWidth: 2,
+    flex: 1,
+  },
+  inactive: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: mvs(7),
+    flex: 1,
+  },
+  centered: {
+    justifyContent: 'center',
+    flex: 1,
+    alignItems: 'center',
+  },
+  emptyText: {
+    marginTop: mvs(-50),
+    textAlign: 'center',
+    width: mvs(200),
+    lineHeight: mvs(23),
+  },
+});

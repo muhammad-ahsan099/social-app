@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "972603446305",
+    "project_id": "videhope-2606f",
+    "storage_bucket": "videhope-2606f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972603446305:android:57ed7477911e428ed13f60",
+        "android_client_info": {
+          "package_name": "com.videhope"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "972603446305-gjpc83t5hemrns6720vu4ks37d5f2q19.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.videhope",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "972603446305-5u462s36p56dd866v7i0q3ptc75nobp1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxH7eMpNHVqtV_hZO2qeJXRW-u12rGaAA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "972603446305-5u462s36p56dd866v7i0q3ptc75nobp1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
