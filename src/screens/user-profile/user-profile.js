@@ -1,7 +1,7 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useState, useRef, useEffect} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState, useRef, useEffect } from 'react';
 import convertToProxyURL from 'react-native-video-cache';
-import {useFocusEffect} from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import {
   Image,
   ImageBackground,
@@ -9,12 +9,13 @@ import {
   TouchableOpacity,
   View,
   ToastAndroid,
+  Alert,
 } from 'react-native';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import APP_API from '../../store/api-calls';
-import {Styles as styles} from './style';
-import {mvs} from '../../services/metrices';
-import {Dots, Photos, PlayBank, SuperFan, WhiteBack} from '../../assets/svgs';
+import { Styles as styles } from './style';
+import { mvs } from '../../services/metrices';
+import { Dots, Photos, PlayBank, SuperFan, WhiteBack } from '../../assets/svgs';
 import Regular from '../../typo-graphy/regular-text';
 import Spinner from 'react-native-loading-spinner-overlay';
 import LinearGradient from 'react-native-linear-gradient';
@@ -22,23 +23,23 @@ import PrimaryButton from '../../components/buttons/primary-button';
 import SemiBold from '../../typo-graphy/semibold-text';
 import Row from '../../components/atoms/row';
 import Medium from '../../typo-graphy/medium-text';
-import {AddFriend, Back, CircularDotMenu} from '../../assets/svgs';
+import { AddFriend, Back, CircularDotMenu } from '../../assets/svgs';
 import colors from '../../services/colors';
 import AudioItem from '../../components/music/audio';
 import ProfileMenu from '../../components/setting/menu';
 import Video from 'react-native-video';
-import {URLS} from '../../store/api-urls';
+import { URLS } from '../../store/api-urls';
 import ReportModal from '../../components/molecules/modals/report-modal';
 import Bold from '../../typo-graphy/bold-text';
 import SERVICES from '../../services/common-services';
 import ImageModal from '../../components/modals/image-modal';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import UserInfo from '../../components/setting/user-info';
-import {Music} from '../../assets/svgs/setting-icons';
+import { Music } from '../../assets/svgs/setting-icons';
 import UserAudios from '../../components/setting/user-audios';
 import UserVideo from '../../components/setting/user-video';
 import UserImage from '../../components/setting/user-image';
-import {content_types} from '../../store/constant-data';
+import { content_types } from '../../store/constant-data';
 import ReactGA from 'react-ga';
 
 const UserProfile = props => {
@@ -46,14 +47,18 @@ const UserProfile = props => {
     route,
     user_info,
     user_profile,
+    profileVideos,
+    profileAudios,
     profile,
+    getVideos,
+    getAudios,
     follow,
     unfollow,
     block,
     unblock,
     report_user,
   } = props;
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const unfollowedText = t('common:unfollowed');
   const followedText = t('common:followed');
   const unBlockedText = t('common:unBlocked');
@@ -67,17 +72,54 @@ const UserProfile = props => {
   const [numCols] = useState(3);
   const [menu, setMenu] = useState(false);
   const [spinner, setSpinner] = useState(false);
+  const [videoSpinner, setVideoSpinner] = useState(false);
+  const [audioSpinner, setAudioSpinner] = useState(false);
   const [description, setDescription] = useState();
   const videoRef = useRef(null);
   const [imageUri, setImageUri] = useState('');
   const [showImage, setShowImage] = useState(false);
   const [photos, setPhotos] = useState(true);
   const [loading, setLoading] = useState(false);
+  console.log("user_profileuser_profileuser_profileuser_profile", user_profile)
+  console.log("profileVideos", profileVideos)
+  console.log("profileAudios", profileAudios)
   useEffect(() => {
     ReactGA.pageview("window.location.pathname");
     console.log("xsaxa");
     get_profile();
+    getProfileAudios();
+    getProfileVideos();
   }, []);
+
+  // 
+  const loadMoreVideos = () => {
+    if (profileVideos?.currentPage <
+      (profileVideos.totalRecords /
+        profileVideos.itemsPerPage)
+    ) {
+      const nextPage = profileVideos?.currentPage + 1;
+      getProfileVideos(nextPage);
+    }
+  };
+  const loadMoreAudios = () => {
+    if (profileAudios?.currentPage <
+      (profileAudios.totalRecords /
+        profileAudios.itemsPerPage)) {
+      const nextPage = profileAudios?.currentPage + 1;
+      getProfileAudios(nextPage);
+    }
+  };
+  const getProfileVideos = async (page = 1) => {
+    setVideoSpinner(true);
+    var res = await getVideos({ id: route.params.id, page, pageSize: 6 });
+    setVideoSpinner(false);
+  };
+  const getProfileAudios = async (page = 1) => {
+    setAudioSpinner(true);
+    var res = await getAudios({ id: route.params.id, page, pageSize: 6 });
+    setAudioSpinner(false);
+  };
+
   const get_profile = async () => {
     console.log('Getting user Profile ', route.params.id);
     setSpinner(true);
@@ -142,19 +184,19 @@ const UserProfile = props => {
     setShowImage(true);
   }
   return (
-    <View style={{...styles.container}}>
+    <View style={{ ...styles.container }}>
       {spinner ? (
         <Spinner
           visible={spinner}
           textContent={t('common:loading')}
-          textStyle={{color: '#FFF'}}
+          textStyle={{ color: '#FFF' }}
         />
       ) : (
         <>
           <Spinner
             visible={loading}
             textContent={''}
-            textStyle={{color: '#FFF'}}
+            textStyle={{ color: '#FFF' }}
           />
           <Row style={styles.header_back}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -177,7 +219,7 @@ const UserProfile = props => {
                   })
                 }
                 style={styles.superFanBtn}
-                titleStyle={{fontSize: mvs(11)}}
+                titleStyle={{ fontSize: mvs(11) }}
               />
               <PrimaryButton
                 title={
@@ -191,7 +233,7 @@ const UserProfile = props => {
                   backgroundColor: colors.primary,
                   borderWidth: 0,
                 }}
-                titleStyle={{fontSize: mvs(11)}}
+                titleStyle={{ fontSize: mvs(11) }}
               />
               <PrimaryButton
                 title={
@@ -205,7 +247,7 @@ const UserProfile = props => {
                   backgroundColor: colors.primary,
                   borderWidth: 0,
                 }}
-                titleStyle={{fontSize: mvs(11)}}
+                titleStyle={{ fontSize: mvs(11) }}
               />
             </Row>
             <View style={styles.line}></View>
@@ -223,16 +265,19 @@ const UserProfile = props => {
             </View>
           </View>
           {photos ? (
-            user_profile?.videos?.length > 0 ? (
+            profileVideos?.results?.length > 0 ? (
               <FlatList
                 numColumns={numCols}
                 contentContainerStyle={{
                   paddingBottom: mvs(20),
                   marginTop: mvs(5),
                 }}
+                onEndReached={loadMoreVideos}
+                onRefresh={getProfileVideos}
+                refreshing={videoSpinner}
                 key={numCols}
-                data={user_profile?.videos}
-                renderItem={({item, index}) =>
+                data={profileVideos?.results}
+                renderItem={({ item, index }) =>
                   item?.content?.type == content_types.photo ? (
                     <UserImage
                       user_profile={user_profile}
@@ -251,7 +296,7 @@ const UserProfile = props => {
                       showPrivate={
                         user_profile?.isSubscribedByMe ? false : true
                       }
-                      item={item}                       
+                      item={item}
                       user_profile={user_profile}
                       key={index}
                       index={index}
@@ -270,6 +315,10 @@ const UserProfile = props => {
             )
           ) : (
             <UserAudios
+              audioSpinner={audioSpinner}
+              getProfileAudios={getProfileAudios}
+              profileAudios={profileAudios}
+              loadMoreAudios={loadMoreAudios}
               imageUrl={`${URLS.image_url}${user_profile?.user?.profile}`}
               user_profile={user_profile}
             />
@@ -322,10 +371,15 @@ const UserProfile = props => {
 const mapStateToProps = store => ({
   user_info: store.state.user_info,
   user_profile: store.state.profile,
+  profileVideos: store.state.profileVideos,
+  profileAudios: store.state.profileAudios,
+
 });
 
 const mapDispatchToProps = {
   profile: userId => APP_API.profile(userId, false),
+  getVideos: params => APP_API.profileVideos(params),
+  getAudios: params => APP_API.profileAudios(params),
   follow: payload => APP_API.follow(payload),
   unfollow: payload => APP_API.unfollow(payload),
   block: payload => APP_API.block_user(payload),

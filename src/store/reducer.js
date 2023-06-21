@@ -18,6 +18,8 @@ const INITIAL_STATE = {
   search_users: [],
   user_find: [],
   profile: {},
+  profileAudios: { "currentPage": 1, "hasNext": true, "hasPrevious": false, "itemsPerPage": 6, "results": [], "totalItems": 0, "totalPages": 0, "totalRecords": 0 },
+  profileVideos: { "currentPage": 1, "hasNext": true, "hasPrevious": false, "itemsPerPage": 6, "results": [], "totalItems": 0, "totalPages": 0, "totalRecords": 0 },
   user_data: {},
   chat_list: [],
   chat: [],
@@ -87,6 +89,16 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         profile: action.payload,
+      };
+    case Actions.SET_PROFILE_Videos:
+      return {
+        ...state,
+        profileVideos: { ...action.payload, results: action.payload?.currentPage == 1 ? action.payload.results : state.profileVideos.results.concat(action.payload.results) },
+      };
+    case Actions.SET_PROFILE_Audios:
+      return {
+        ...state,
+        profileAudios: { ...action.payload, results: action.payload?.currentPage == 1 ? action.payload.results : state.profileAudios.results.concat(action.payload.results) },
       };
     case Actions.SET_USER_DATA:
       return {

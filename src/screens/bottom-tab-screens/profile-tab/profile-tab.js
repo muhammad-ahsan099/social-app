@@ -21,7 +21,10 @@ import { Styles as styles } from './style';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
 import Regular from '../../../typo-graphy/regular-text';
 const ProfileTab = props => {
-  const { user_info, user_profile, profile, delete_content } = props;
+  const { user_info, user_profile,
+    profileVideos,
+    profileAudios,
+    profile, getVideos, getAudios, delete_content } = props;
   const navigation = useNavigation();
   const [numCols] = useState(3);
   const [menu, setMenu] = useState(false);
@@ -30,11 +33,51 @@ const ProfileTab = props => {
   const [showImage, setShowImage] = useState(false);
   const [photos, setPhotos] = useState(true);
   const [spinner, setSpinner] = useState(false);
+  const [videoSpinner, setVideoSpinner] = useState(false);
+  const [audioSpinner, setAudioSpinner] = useState(false);
   useFocusEffect(
     React.useCallback(() => {
       get_profile();
+      getProfileAudios()
+      getProfileVideos()
     }, []),
   );
+
+  const loadMoreVideos = () => {
+    if (profileVideos?.currentPage <
+      (profileVideos.totalRecords /
+        profileVideos.itemsPerPage)
+    ) {
+      const nextPage = profileVideos?.currentPage + 1;
+      getProfileVideos(nextPage);
+    }
+  };
+  const loadMoreAudios = () => {
+    if (profileAudios?.currentPage <
+      (profileAudios.totalRecords /
+        profileAudios.itemsPerPage)) {
+      const nextPage = profileAudios?.currentPage + 1;
+      getProfileAudios(nextPage);
+    }
+  };
+  const getProfileVideos = async (page = 1) => {
+    setVideoSpinner(true);
+    var res = await getVideos({
+      id:
+        7// route.params.id
+      , page, pageSize: 6
+    });
+    setVideoSpinner(false);
+  };
+  const getProfileAudios = async (page = 1) => {
+    setAudioSpinner(true);
+    var res = await getAudios({
+      id:
+        7// route.params.id
+      , page, pageSize: 6
+    });
+    setAudioSpinner(false);
+  };
   const get_profile = async () => {
     await profile(user_info?.id);
   };
@@ -85,14 +128,17 @@ const ProfileTab = props => {
         </View>
       </View>
       {photos ? (
-        user_profile?.videos?.length > 0 ? (
+        profileVideos?.results?.length > 0 ? (
           <FlatList
             numColumns={numCols}
             contentContainerStyle={{
               paddingBottom: mvs(20),
             }}
+            onEndReached={loadMoreVideos}
+            onRefresh={getProfileVideos}
+            refreshing={videoSpinner}
             key={numCols}
-            data={user_profile?.videos}
+            data={profileVideos?.results}
             renderItem={({ item, index }) =>
               item?.content?.type == content_types.photo ? (
                 <UserImage
@@ -130,6 +176,10 @@ const ProfileTab = props => {
         )
       ) : (
         <UserAudios
+          audioSpinner={audioSpinner}
+          getProfileAudios={getProfileAudios}
+          profileAudios={profileAudios}
+          loadMoreAudios={loadMoreAudios}
           showDelete={true}
           onDelete={id => deleteAudioContent(id)}
           imageUrl={`${URLS.image_url}${user_info?.profile}`}
@@ -166,10 +216,14 @@ const ProfileTab = props => {
 const mapStateToProps = store => ({
   user_info: store.state.user_info,
   user_profile: store.state.my_info,
+  profileVideos: store.state.profileVideos,
+  profileAudios: store.state.profileAudios,
 });
 
 const mapDispatchToProps = {
   profile: userId => APP_API.profile(userId, true),
+  getVideos: params => APP_API.profileVideos(params),
+  getAudios: params => APP_API.profileAudios(params),
   delete_content: id => APP_API.delete_content(id),
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileTab);

@@ -2,8 +2,8 @@ import * as Actions from './action-types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SERVICES from '../services/common-services';
 import API_REQUESTS from './api-requests';
-import {URLS} from './api-urls';
-import {Alert} from 'react-native';
+import { URLS } from './api-urls';
+import { Alert } from 'react-native';
 const register = payload => {
   return async (dispatch, getState) => {
     try {
@@ -66,7 +66,7 @@ const delete_account = payload => {
     try {
       const response = await API_REQUESTS.deleteData(
         URLS.account.delete_account,
-        {data: payload},
+        { data: payload },
       );
       return response;
     } catch (error) {
@@ -163,7 +163,7 @@ const home_content = (params) => {
       alert(URLS.content.home_content);
       const response = await API_REQUESTS.getPaginateData(URLS.content.home_content, params);
       alert("as");
-       console.log(response?.data)
+      console.log(response?.data)
       if (response?.data?.succeeded == true) {
         //ACTIONS.setSearchUsers(response?.data?.User)
         dispatch({
@@ -673,6 +673,52 @@ const profile = (userId, isMe = false) => {
     }
   };
 };
+const profileVideos = (params) => {
+  return async (dispatch, getState) => {
+    try {
+      if(params?.page == 1)
+      dispatch({
+        type: Actions.SET_PROFILE_Videos,
+        payload: { "currentPage": 1, "hasNext": true, "hasPrevious": false, "itemsPerPage": 6, "results": [], "totalItems": 0, "totalPages": 0, "totalRecords": 0 }
+      });
+      console.log("asssssssss", params)
+      const response = await API_REQUESTS.getPaginateData(URLS.user.video, params);
+      if (response?.data?.succeeded == true) {
+        console.log('profileVideos res',response?.data);
+        dispatch({
+          type: Actions.SET_PROFILE_Videos,
+          payload: response?.data?.data,
+        });
+      }
+      return response;
+    } catch (error) {
+      return error;
+    }
+  };
+};
+const profileAudios = (params) => {
+  return async (dispatch, getState) => {
+    try {
+      if(params?.page == 1)
+      dispatch({
+        type: Actions.SET_PROFILE_Audios,
+        payload: { "currentPage": 1, "hasNext": true, "hasPrevious": false, "itemsPerPage": 6, "results": [], "totalItems": 0, "totalPages": 0, "totalRecords": 0 }
+      });
+      console.log("params", params)
+      const response = await API_REQUESTS.getPaginateData(URLS.user.audio, params);
+      if (response?.data?.succeeded == true) {
+        console.log('profileAudios res',response?.data);
+        dispatch({
+          type: Actions.SET_PROFILE_Audios,
+          payload: response?.data?.data,
+        });
+      }
+      return response;
+    } catch (error) {
+      return error;
+    }
+  };
+};
 
 const update_interest = payload => {
   return async (dispatch, getState) => {
@@ -869,6 +915,8 @@ const APP_API = {
   creators,
   search_user,
   profile,
+  profileAudios,
+  profileVideos,
   update_interest,
   update_fcm,
   update_subscription_price,

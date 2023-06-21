@@ -7,6 +7,7 @@ import {mvs} from '../../../services/metrices';
 import {content_types} from '../../../store/constant-data';
 const HomeVideos = ({
   videos,
+  onRefresh,
   loadMoreVideos = () => {},
   onSharePress = () => {},
   onCommentPress = () => {},
@@ -109,6 +110,8 @@ const HomeVideos = ({
       viewabilityConfig={viewConfigRef.current}
       onEndReached={loadMoreVideos}
       onEndReachedThreshold={0.5}
+      onRefresh={onRefresh}
+      refreshing={false}
     />
   );
 };

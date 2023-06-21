@@ -137,24 +137,29 @@ const HomeReels = ({ refresh_screen = false, ...props }) => {
   //   }
   // };
   const loadMoreVideos = () => {
-    alert("load more")
     if (currentPage < totalPages) {
       const nextPage = currentPage + 1;
       getHomeVideos(nextPage);
     }
   };
-  
-  const getHomeVideos = async (page) => {
+
+  const getHomeVideos = async (page = 1) => {
     setSpinner(true);
-    var res = await getVideos({ page, pageSize: 10 });
-    console.log("res?.data?.data",Object.keys(res?.data?.data))
-    console.log("res?.data?.data",res?.data?.data)
+    var res = await getVideos({ page, pageSize: 6 });
     setSpinner(false);
     if (res?.data?.data) {
-      var shuffledList = shuffle(res?.data?.data?.items);
-      setHomeVideos(shuffledList);
+      var shuffledList = shuffle(res?.data?.data?.results);
+      if (page == 1) {
+        setHomeVideos(shuffledList);
+      } else {
+        setHomeVideos(homeVideos.concat(shuffledList));
+      }
       setCurrentPage(page);
-      setTotalPages(res?.data?.totalPages);
+      setTotalPages(
+        res?.data?.data?.totalRecords /
+        res?.data?.data?.itemsPerPage
+      );
+
     }
   };
 
@@ -295,6 +300,7 @@ const HomeReels = ({ refresh_screen = false, ...props }) => {
         <HomeVideos
           user_info={user_info}
           videos={homeVideos}
+          onRefresh={getHomeVideos}
           loadMoreVideos={loadMoreVideos}
           onCommentPress={id => get_video_comments(id)}
           onLikePress={(id, isLikeByMe) => likeContent(id, isLikeByMe)}

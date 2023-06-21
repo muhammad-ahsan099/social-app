@@ -1,19 +1,23 @@
-import React, {useEffect} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import React, { useEffect } from 'react';
+import { FlatList, StyleSheet, View } from 'react-native';
 import colors from '../../services/colors';
-import {mvs} from '../../services/metrices';
+import { mvs } from '../../services/metrices';
 import AudioItem from '../music/audio';
 import Sound from 'react-native-sound';
-import {useState} from 'react';
-import {URLS} from '../../store/api-urls';
+import { useState } from 'react';
+import { URLS } from '../../store/api-urls';
 import Regular from '../../typo-graphy/regular-text';
 import RNFetchBlob from 'rn-fetch-blob';
 import AudioModal from '../modals/audio-modal';
 const UserAudios = ({
+  profileAudios,
+  getProfileAudios,
+  audioSpinner,
+  loadMoreAudios,
   user_profile,
   imageUrl,
   showDelete = false,
-  onDelete = arg => {},
+  onDelete = arg => { },
 }) => {
   const [isPlaying, setPlaying] = useState(false);
   const [currentTrackId, setCurrentTrackId] = useState(-1);
@@ -67,9 +71,9 @@ const UserAudios = ({
   };
   return loading ? (
     <View style={styles.centered}>
-      <Regular label={'Loading....'} style={{marginTop: mvs(-50)}} />
+      <Regular label={'Loading....'} style={{ marginTop: mvs(-50) }} />
     </View>
-  ) : user_profile?.audios?.length > 0 ? (
+  ) : profileAudios?.results?.length > 0 ? (
     <View>
       <FlatList
         numColumns={1}
@@ -78,9 +82,12 @@ const UserAudios = ({
           marginTop: mvs(5),
           paddingHorizontal: mvs(10),
         }}
+        onEndReached={loadMoreAudios}
+        onRefresh={getProfileAudios}
+        refreshing={audioSpinner}
         key={1}
-        data={user_profile?.audios}
-        renderItem={({item, index}) => (
+        data={profileAudios?.results}
+        renderItem={({ item, index }) => (
           <AudioItem
             key={index}
             name={item?.content?.description || user_profile?.user?.userName}
@@ -103,7 +110,7 @@ const UserAudios = ({
     <View style={styles.centered}>
       <Regular
         label={'User Audios will appear here'}
-        style={{marginTop: mvs(-50)}}
+        style={{ marginTop: mvs(-50) }}
       />
     </View>
   );
