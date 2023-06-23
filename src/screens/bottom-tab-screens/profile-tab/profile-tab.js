@@ -63,8 +63,7 @@ const ProfileTab = props => {
   const getProfileVideos = async (page = 1) => {
     setVideoSpinner(true);
     var res = await getVideos({
-      id:
-        7// route.params.id
+      id: route.params.id
       , page, pageSize: 6
     });
     setVideoSpinner(false);
@@ -72,8 +71,7 @@ const ProfileTab = props => {
   const getProfileAudios = async (page = 1) => {
     setAudioSpinner(true);
     var res = await getAudios({
-      id:
-        7// route.params.id
+      id: route.params.id
       , page, pageSize: 6
     });
     setAudioSpinner(false);
