@@ -67,12 +67,12 @@ const ActivityTab = props => {
           style={
             selectedTab == 'activity'
               ? styles.selectedTabButton
-              : styles.unSelectedTabButton
+              : styles.unSelectedTabButton  
           }
           titleStyle={styles.textStylye}
           title={t('common:activity')}
         />
-        <PrimaryButton
+        {/* <PrimaryButton
           onClick={() => onMessage()}
           style={
             selectedTab == 'msgs'
@@ -81,7 +81,7 @@ const ActivityTab = props => {
           }
           titleStyle={styles.textStylye}
           title={t('common:messages')}
-        />
+        /> */}
       </View>
 
       <View style={styles.body}>

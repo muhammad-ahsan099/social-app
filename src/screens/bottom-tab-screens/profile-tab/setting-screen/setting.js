@@ -45,12 +45,12 @@ const Setting = props => {
       icon: 'Earning',
       action: 'Earning',
     },
-    {
-      id: 7,
-      title: 'savedMedia',
-      icon: 'Media',
-      action: 'Media',
-    },
+    // {
+    //   id: 7,
+    //   title: 'savedMedia',
+    //   icon: 'Media',
+    //   action: 'Media',
+    // },
     {
       id: 8,
       title: 'reportAProblem',
@@ -101,16 +101,16 @@ const Setting = props => {
             />
           ))}
           <View style={styles.line}></View>
-          <SettingItem
+          {/* <SettingItem
             title={SERVICES.translate('terms')}
             onClick={() => navigation.navigate('TermsAndCondition')}
             icon="Policy"
-          />
-          <SettingItem
+          /> */}
+          {/* <SettingItem
             title={SERVICES.translate('policy')}
             onClick={() => navigation.navigate('PrivacyPolicy')}
             icon="Policy"
-          />
+          /> */}
           <SettingItem
             title={SERVICES.translate('deleteMyAccount')}
             onClick={() => navigation.navigate('DeleteAccount')}

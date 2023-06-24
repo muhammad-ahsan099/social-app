@@ -211,7 +211,7 @@ const UserProfile = props => {
           <View style={styles.body}>
             <UserInfo user_profile={user_profile} />
             <Row style={styles.buttonView} alignItems="center">
-              <PrimaryButton
+              {/* <PrimaryButton
                 title={t('common:message')}
                 onClick={() =>
                   navigation.navigate('Conversation', {
@@ -220,7 +220,7 @@ const UserProfile = props => {
                 }
                 style={styles.superFanBtn}
                 titleStyle={{ fontSize: mvs(11) }}
-              />
+              /> */}
               <PrimaryButton
                 title={
                   user_profile?.isSubscribedByMe
@@ -235,7 +235,7 @@ const UserProfile = props => {
                 }}
                 titleStyle={{ fontSize: mvs(11) }}
               />
-              <PrimaryButton
+              {/* <PrimaryButton
                 title={
                   !user_profile?.isFollowByMe
                     ? t('common:follow')
@@ -248,7 +248,7 @@ const UserProfile = props => {
                   borderWidth: 0,
                 }}
                 titleStyle={{ fontSize: mvs(11) }}
-              />
+              /> */}
             </Row>
             <View style={styles.line}></View>
             <View style={styles.bottomTab}>

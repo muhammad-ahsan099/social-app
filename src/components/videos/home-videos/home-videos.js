@@ -63,7 +63,7 @@ const HomeVideos = ({
           onCommentPress={id => onCommentPress(id)}
           onLikePress={(id, isLikeByMe) => onLikePress(id, isLikeByMe)}
           onSavePress={(id, isSavedByMe) => onSavePress(id, isSavedByMe)}
-          onSharePress={(id, path) => onSharePress(id, path)}
+          // onSharePress={(id, path) => onSharePress(id, path)}
           onUserPress={() => viewProfile(item)}
           onSubscribePress={() => subscribe(item)}
           isFocus={isFocus}

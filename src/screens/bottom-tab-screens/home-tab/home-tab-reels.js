@@ -291,10 +291,10 @@ const HomeReels = ({ refresh_screen = false, ...props }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity style={styles.ddown} onPress={() => setShow(true)}>
+        {/* <TouchableOpacity style={styles.ddown} onPress={() => setShow(true)}>
           <Regular label={type} style={{ marginRight: mvs(10) }} />
           <Drop />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       {
         <HomeVideos

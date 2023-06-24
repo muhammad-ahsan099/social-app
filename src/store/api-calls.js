@@ -160,7 +160,9 @@ const unblock_user = payload => {
 const home_content = (params) => {
   return async (dispatch, getState) => {
     try {
+      //alert(URLS.content.home_content);
       const response = await API_REQUESTS.getPaginateData(URLS.content.home_content, params);
+      //alert("as");
       console.log(response?.data)
       if (response?.data?.succeeded == true) {
         //ACTIONS.setSearchUsers(response?.data?.User)

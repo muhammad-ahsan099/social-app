@@ -25,18 +25,18 @@ const UserInfo = ({user_profile = {}}) => {
         ) : (
           <View style={styles.empty_image}></View>
         )}
-        <View style={styles.center}>
+        {/* <View style={styles.center}>
           <SemiBold size={mvs(12)} label={user_profile?.user?.following} />
           <Medium size={mvs(12)} label={t('common:following')} />
-        </View>
+        </View> */}
         <View style={styles.center}>
           <SemiBold size={mvs(12)} label={user_profile?.user?.superFans} />
           <Medium size={mvs(12)} label={t('common:userSuperFans')} />
         </View>
-        <View style={styles.center}>
+        {/* <View style={styles.center}>
           <SemiBold size={mvs(12)} label={user_profile?.user?.followers} />
           <Medium size={mvs(12)} label={t('common:followers')} />
-        </View>
+        </View> */}
       </Row>
 
       <View style={{paddingTop: mvs(10)}}>
@@ -75,8 +75,8 @@ const styles = StyleSheet.create({
     borderRadius: mvs(1000),
   },
   center: {
-    justifyContent: 'center',
-    alignItems: 'center',
+     justifyContent: 'center',
+     alignItems: 'center',
   },
   empty_image: {
     height: mvs(70),

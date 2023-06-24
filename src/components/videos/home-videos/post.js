@@ -209,7 +209,7 @@ const Post = ({
         </View>
       )}
       <View style={styles.actions}>
-        <Row alignItems="center" style={{width: '30%'}}>
+        <Row alignItems="center" style={{width: '20%'}}>
           <TouchableOpacity
             onPress={() => {
               onLikePress(item?.id, like);
@@ -225,17 +225,17 @@ const Post = ({
           <TouchableOpacity onPress={() => onCommentPress(item?.id)}>
             <Chat />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => onSharePress(item?.id, item?.path)}>
+          {/* <TouchableOpacity onPress={() => onSharePress(item?.id, item?.path)}>
             <Share />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </Row>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => {
             onSavePress(item?.id, save);
             setSave(!save);
           }}>
           {save ? <BlueSave /> : <Save />}
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <Regular
         style={styles.likes}
