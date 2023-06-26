@@ -111,12 +111,12 @@ const UserProfile = props => {
   };
   const getProfileVideos = async (page = 1) => {
     setVideoSpinner(true);
-    var res = await getVideos({ id: route.params.id, page, pageSize: 6 });
+    var res = await getVideos({ id: route.params.id, page, pageSize: 9 });
     setVideoSpinner(false);
   };
   const getProfileAudios = async (page = 1) => {
     setAudioSpinner(true);
-    var res = await getAudios({ id: route.params.id, page, pageSize: 6 });
+    var res = await getAudios({ id: route.params.id, page, pageSize: 9 });
     setAudioSpinner(false);
   };
 

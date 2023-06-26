@@ -1,7 +1,8 @@
 // In App.js in a new project
 import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation, CommonActions } from '@react-navigation/native';
 import * as React from 'react';
-import { StatusBar, View } from 'react-native';
+import { Alert, StatusBar, View } from 'react-native';
 import Splash from '../../screens/splash-screen';
 import SigninScreen from '../../screens/signin-screen';
 import SignUp from '../../screens/sign-up-screen/sign-up';
@@ -50,6 +51,8 @@ import SubscriptionPayment from '../../screens/bottom-tab-screens/profile-tab/su
 import HomePage from '../../screens/live-streaming/HomePage';
 import HostPage from '../../screens/live-streaming/HostPage';
 import AudiencePage from '../../screens/live-streaming/AudiancePage';
+import { AppState } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
 const horizontalAnimation = {
@@ -71,6 +74,53 @@ const horizontalAnimation = {
   },
 };
 export const MainNavigator = () => {
+
+  // check app state and naigate to login again if more then 5 hours
+  let appStateTimestamp = null;
+  const navigation = useNavigation();
+
+  // Method to run when the app becomes active after being in the background for more than 5 hours
+  const onSignOut = async () => {
+    const user = await AsyncStorage.getItem('@user');
+    if (user) {
+      console.log("user",user)
+      let email = user && JSON.parse(user)?.email
+      console.log("set", email)
+      await AsyncStorage.clear();
+      await AsyncStorage.setItem('@email', JSON.stringify(email));
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [
+            { name: 'Splash' },
+          ],
+        }),
+      );
+    }
+  };
+
+  // Calculate the time difference between background and active states
+  const calculateTimeDifference = () => {
+    const currentTime = new Date().getTime();
+    const backgroundTime = new Date(appStateTimestamp).getTime();
+    const timeDifference = Math.floor((currentTime - backgroundTime) / (1000 * 60 * 60)); // Difference in hours
+    return timeDifference;
+  };
+
+  // Listen to app state changes
+  // AppState.addEventListener('change', (newState) => {
+  //   if (newState === 'background') {
+  //     appStateTimestamp = new Date();
+  //   } else if (newState === 'active') {
+  //     if (appStateTimestamp) {
+  //       const timeDifference = calculateTimeDifference();
+  //       if (timeDifference >= 3) {
+  //       onSignOut(3);
+  //       }
+  //     }
+  //     appStateTimestamp = null;
+  //   }
+  // });
   const insets = useSafeAreaInsets();
   return (
     <View style={{ flex: 1, marginTop: insets.top }}>

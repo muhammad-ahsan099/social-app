@@ -21,7 +21,7 @@ import { Styles as styles } from './style';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
 import Regular from '../../../typo-graphy/regular-text';
 const ProfileTab = props => {
-  const { user_info, user_profile,
+  const { route, user_info, user_profile,
     profileVideos,
     profileAudios,
     profile, getVideos, getAudios, delete_content } = props;
@@ -61,18 +61,26 @@ const ProfileTab = props => {
     }
   };
   const getProfileVideos = async (page = 1) => {
+    console.log("route,,,",
+    Object.keys(user_info),
+    //  user_profile,
+    // profileVideos,
+    // profileAudios,
+    // profile,
+
+    )
     setVideoSpinner(true);
     var res = await getVideos({
-      id: route.params.id
-      , page, pageSize: 6
+      id: user_info?.id
+      , page, pageSize: 9
     });
     setVideoSpinner(false);
   };
   const getProfileAudios = async (page = 1) => {
     setAudioSpinner(true);
     var res = await getAudios({
-      id: route.params.id
-      , page, pageSize: 6
+      id: user_info?.id
+      , page, pageSize: 9
     });
     setAudioSpinner(false);
   };

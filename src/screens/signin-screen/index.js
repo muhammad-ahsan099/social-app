@@ -18,6 +18,8 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import AudioModal from '../../components/modals/audio-modal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 //Facebook Sign in
 // import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 // import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
@@ -32,6 +34,16 @@ const Signin = props => {
     email: '',
     password: '',
   });
+  const setSavedEmail = async () => {
+    const email = await AsyncStorage.getItem('@email');
+    console.log("email",email)
+    if (email) {
+      setPayload({ ...payload, email })
+    }
+  }
+  useEffect(() => {
+    setSavedEmail()
+  }, [])
   // useEffect(() => {
   //   configureGoogleSign();
   // }, []);
