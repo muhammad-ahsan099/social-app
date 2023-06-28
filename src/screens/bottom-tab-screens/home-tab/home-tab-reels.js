@@ -147,6 +147,7 @@ const HomeReels = ({ refresh_screen = false, ...props }) => {
     setSpinner(true);
     var res = await getVideos({ page, pageSize: 6 });
     setSpinner(false);
+    // console.log("Res of Get Videos: ", res.data.data);
     if (res?.data?.data) {
       var shuffledList = shuffle(res?.data?.data?.results);
       if (page == 1) {
@@ -296,6 +297,7 @@ const HomeReels = ({ refresh_screen = false, ...props }) => {
           <Drop />
         </TouchableOpacity> */}
       </View>
+      {console.log("Home Videos 0 Index [0]: ", homeVideos[0])}
       {
         <HomeVideos
           user_info={user_info}

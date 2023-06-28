@@ -16,6 +16,7 @@ const ReelsComponent = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigation = useNavigation();
   const listRef = useRef(null);
+  // console.log("Videos: ", videos);
 
   const handleChangeIndexValue = ({index}) => {
     setCurrentIndex(index);
@@ -59,6 +60,7 @@ const ReelsComponent = ({
           index={index}
           isLikeByMe={item?.isLikeByMe}
           isSavedByMe={item?.isSavedByMe}
+          isExpiredSubscriptions={item?.content?.isExpired}
           isSubscribedByMe={item?.isSubscribedByMe}
           userImage={item?.userImage}
           userName={item?.userName}

@@ -40,6 +40,7 @@ const UserReelsComponent = ({
       user_info={user_info}
       isLikeByMe={item?.isLikeByMe}
       isSavedByMe={item?.isSavedByMe}
+      isExpiredSubscriptions={item?.content?.isExpired}
       isSubscribedByMe={item?.isSubscribedByMe}
       userImage={item?.userImage}
       userName={item?.userName}

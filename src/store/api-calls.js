@@ -163,7 +163,6 @@ const home_content = (params) => {
       //alert(URLS.content.home_content);
       const response = await API_REQUESTS.getPaginateData(URLS.content.home_content, params);
       //alert("as");
-      console.log(response?.data)
       if (response?.data?.succeeded == true) {
         //ACTIONS.setSearchUsers(response?.data?.User)
         dispatch({

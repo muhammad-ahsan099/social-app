@@ -42,6 +42,7 @@ const Post = ({
   currentIndex,
   isLikeByMe = false,
   isSavedByMe = false,
+  isExpiredSubscriptions=false,
   isSubscribedByMe = false,
   userImage,
   userName,
@@ -61,6 +62,7 @@ const Post = ({
   const [like, setLike] = useState(isLikeByMe);
   const [save, setSave] = useState(isSavedByMe);
   const [isSubscribed] = useState(isSubscribedByMe);
+  const [isExpiredSubscription] = useState(isExpiredSubscriptions);
   const [totalLikes, setTotalLikes] = useState(item?.likes);
   const [postHeight, setPostHeight] = useState(windowHeight / 3);
   const {t} = useTranslation();
@@ -95,7 +97,7 @@ const Post = ({
       />
       {item?.viewerType == 'Private' &&
       item?.userId != user_info?.id &&
-      isSubscribed == false ? (
+      isSubscribed == false || !isExpiredSubscription ? (
         <View style={styles.container}>
           <TouchableOpacity activeOpacity={0.98} style={styles.private}>
             <View opacity={0.95} style={styles.private_view}>

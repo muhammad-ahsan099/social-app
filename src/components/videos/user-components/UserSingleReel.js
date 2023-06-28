@@ -27,6 +27,7 @@ const UserSingleReel = ({
   currentIndex,
   isLikeByMe = false,
   isSavedByMe = false,
+  isExpiredSubscriptions=false,
   isSubscribedByMe = false,
   userImage,
   userName,
@@ -46,6 +47,7 @@ const UserSingleReel = ({
   const [like, setLike] = useState(isLikeByMe);
   const [save, setSave] = useState(isSavedByMe);
   const [isSubscribed, setSubscribed] = useState(isSubscribedByMe);
+  const [isExpiredSubscription, setIsExpiredSubscription] = useState(isExpiredSubscriptions);
   const [totalLikes, setTotalLikes] = useState(item?.likes);
   const onBuffer = buffer => {
     if (buffer?.isBuffering) {
@@ -63,7 +65,7 @@ const UserSingleReel = ({
   //console.log("Video Url--->",`${URLS.image_url}${item?.path}`)
   return item?.viewerType == 'Private' &&
     item?.userId != user_info?.id &&
-    isSubscribed == false ? (
+    isSubscribed == false || !isExpiredSubscription ? (
     <View style={styles.container}>
       <TouchableOpacity
         activeOpacity={0.98}

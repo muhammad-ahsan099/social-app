@@ -29,7 +29,7 @@ const getData = async url => {
   return response;
 };
 const getPaginateData = async (url, params) => {
-  console.log('url: ', url);
+  console.log('url: ', url, "params of getPaginatedData: ", params);
   const response = await client.get(url, {params});
   return response;
 };

@@ -15,6 +15,7 @@ const UserVideo = ({item, showPrivate = true, user_profile, index}) => {
   const {t} = useTranslation();
   const navigation = useNavigation();
   const videoRef = useRef(null);
+  console.log("user_profile?.videos All Videos of the user: ", user_profile?.videos.length , user_profile?.videos[0]);
   return (
     <TouchableOpacity
       style={styles.photoStyle}
