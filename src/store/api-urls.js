@@ -17,7 +17,7 @@ export const URLS = {
     unblock_user: 'block/unblock-user',
   },
   content: {
-    home_content: 'http://fcoll242-001-site12.etempurl.com/api/content/home-contentV1',
+    home_content: 'content/home-contentV1',
     // home_content: 'content/home-content',
     upload_content: 'content/upload-content',
     like_content: 'content/like-content',

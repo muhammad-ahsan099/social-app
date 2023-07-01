@@ -65,7 +65,7 @@ const SingleReel = ({
   //console.log("App State--->",AppState.currentState)
   return item?.viewerType == 'Private' &&
     item?.userId != user_info?.id &&
-    isSubscribed == false || !isExpiredSubscription ? (
+    isSubscribed == false || isExpiredSubscription == true ? (
     <View style={styles.container}>
       <TouchableOpacity
         activeOpacity={0.98}

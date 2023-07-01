@@ -65,7 +65,8 @@ const UserSingleReel = ({
   //console.log("Video Url--->",`${URLS.image_url}${item?.path}`)
   return item?.viewerType == 'Private' &&
     item?.userId != user_info?.id &&
-    isSubscribed == false || !isExpiredSubscription ? (
+    // isSubscribed == false || !isExpiredSubscription ? (
+    isSubscribed == false || isExpiredSubscription == true ? (
     <View style={styles.container}>
       <TouchableOpacity
         activeOpacity={0.98}
