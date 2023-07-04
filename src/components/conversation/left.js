@@ -3,7 +3,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import colors from '../../services/colors';
 import {mvs} from '../../services/metrices';
 import ImagePlaceholder from '../atoms/image-placeholder';
-import {URLS} from '../../store/api-urls';
+import {STORAGE_URL, URLS} from '../../store/api-urls';
 import Row from '../atoms/row';
 import Regular from '../../typo-graphy/regular-text';
 import Video from 'react-native-video';
@@ -20,7 +20,8 @@ const Left = ({
   return (
     <Row style={{...styles.container}}>
       <FastImage
-        source={{uri: `${URLS.image_url}${imageUrl}`}}
+        // source={{uri: `${URLS.image_url}${imageUrl}`}}
+        source={{uri: `${STORAGE_URL}${imageUrl}`}}
         style={type == 'text' ? styles.image : styles.videoImage}
       />
       {type == 'text' ? (
@@ -37,7 +38,8 @@ const Left = ({
           style={styles.videoItem}
           onPress={() => setPlaying(!isplaying)}>
           <Video
-            source={{uri: convertToProxyURL(`${URLS.image_url}${messageFile}`)}}
+            // source={{uri: convertToProxyURL(`${URLS.image_url}${messageFile}`)}}
+            source={{uri: convertToProxyURL(`${STORAGE_URL}${messageFile}`)}}
             style={styles.backgroundVideo}
             muted={!isplaying}
             repeat={false}

@@ -17,7 +17,7 @@ import { Camera, WhiteCamera } from '../../../../assets/svgs';
 import ProfileItem from '../../../../components/setting/profile-item';
 import PrimaryButton from '../../../../components/buttons/primary-button';
 import Regular from '../../../../typo-graphy/regular-text';
-import { URLS } from '../../../../store/api-urls';
+import { STORAGE_URL, URLS } from '../../../../store/api-urls';
 import SERVICES from '../../../../services/common-services';
 import EditKeyModal from '../../../../components/modals/edit-key';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -99,7 +99,8 @@ const EditProfile = props => {
             onPress={() => selectPic()}>
             {payload?.Profile == null ? (
               <ImageBackground
-                source={{ uri: `${URLS.image_url}${user_info?.profile}` }}
+                // source={{ uri: `${URLS.image_url}${user_info?.profile}` }}
+                source={{ uri: `${STORAGE_URL}${user_info?.profile}` }}
                 resizeMode='contain'
                 style={styles.imgStyle}
                 blurRadius={0.5}

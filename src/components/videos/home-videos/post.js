@@ -26,7 +26,7 @@ import {
 import colors from '../../../services/colors';
 import SERVICES from '../../../services/common-services';
 import {mvs} from '../../../services/metrices';
-import {URLS} from '../../../store/api-urls';
+import {STORAGE_URL, URLS} from '../../../store/api-urls';
 import {content_types} from '../../../store/constant-data';
 import Bold from '../../../typo-graphy/bold-text';
 import IconTitle from '../../icon-title';
@@ -97,7 +97,7 @@ const Post = ({
       />
       {item?.viewerType == 'Private' &&
       item?.userId != user_info?.id &&
-      // isSubscribed == false || !isExpiredSubscription ? (
+      // isSubscribed == false ? (
       isSubscribed == false || isExpiredSubscription == true ? (
 
         <View style={styles.container}>
@@ -125,14 +125,16 @@ const Post = ({
                   resizeMode="cover"
                   paused={true}
                   source={{
-                    uri: convertToProxyURL(`${URLS.image_url}${item?.path}`),
+                    // uri: convertToProxyURL(`${URLS.image_url}${item?.path}`),
+                    uri: convertToProxyURL(`${STORAGE_URL}${item?.path}`),
                   }}
                   muted={false}
                   style={styles.content}
                 />
               ) : (
                 <FastImage
-                  source={{uri: `${URLS.image_url}${item?.path}`}}
+                  // source={{uri: `${URLS.image_url}${item?.path}`}}
+                  source={{uri: `${STORAGE_URL}${item?.path}`}}
                   style={styles.content}
                 />
               )}
@@ -189,7 +191,8 @@ const Post = ({
                 //resizeMode="stretch"
                 paused={!isPlaying || item?.id != currentIndex}
                 source={{
-                  uri: convertToProxyURL(`${URLS.image_url}${item?.path}`),
+                  // uri: convertToProxyURL(`${URLS.image_url}${item?.path}`),
+                  uri: convertToProxyURL(`${STORAGE_URL}${item?.path}`),
                 }}
                 muted={isMuted}
                 style={{
@@ -199,7 +202,8 @@ const Post = ({
               />
             ) : (
               <FastImage
-                source={{uri: `${URLS.image_url}${item?.path}`}}
+                // source={{uri: `${URLS.image_url}${item?.path}`}}
+                source={{uri: `${STORAGE_URL}${item?.path}`}}
                 style={{...styles.content}}
                 resizeMode="contain"
                 onLoad={event => {

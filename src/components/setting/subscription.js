@@ -4,7 +4,7 @@ import colors from '../../services/colors';
 import {mvs} from '../../services/metrices';
 import SemiBold from '../../typo-graphy/semibold-text';
 import Row from '../atoms/row';
-import {URLS} from '../../store/api-urls';
+import {STORAGE_URL, URLS} from '../../store/api-urls';
 import Bold from '../../typo-graphy/bold-text';
 import moment from 'moment';
 import SERVICES from '../../services/common-services';
@@ -14,7 +14,8 @@ const SubscriptionItem = ({style, onRenew, onUnSubscribe, item}) => {
     <TouchableOpacity>
       <Row style={{...styles.container, ...style}}>
         <FastImage
-          source={{uri: `${URLS.image_url}${item?.userImage}`}}
+          // source={{uri: `${URLS.image_url}${item?.userImage}`}}
+          source={{uri: `${STORAGE_URL}${item?.userImage}`}}
           style={{...styles.image}}
         />
         <Row style={{...styles.info}} alignItems="center">

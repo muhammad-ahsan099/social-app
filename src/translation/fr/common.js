@@ -72,6 +72,7 @@ export default {
   public: 'Pour tout le monde',
   uploadContent: 'Télécharger un contenu',
   selectContent: 'Sélectionner un contenu',
+  selectVideoDuration: 'Désolé! Vidéo moins de 30 sec',
   selectViewerType: 'Sélectionnez le type de visionneur',
   contentUploadedSuccessfully: 'Contenu téléchargé avec succès',
   chooseFromGallery: 'Choisir depuis la galerie',

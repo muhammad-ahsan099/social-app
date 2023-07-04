@@ -6,7 +6,7 @@ import Row from '../atoms/row';
 import Regular from '../../typo-graphy/regular-text';
 import {Edit} from '../../assets/svgs';
 import {useTranslation} from 'react-i18next';
-import {URLS} from '../../store/api-urls';
+import {STORAGE_URL, URLS} from '../../store/api-urls';
 import SemiBold from '../../typo-graphy/semibold-text';
 import Medium from '../../typo-graphy/medium-text';
 import FastImage from 'react-native-fast-image';
@@ -18,7 +18,8 @@ const UserInfo = ({user_profile = {}}) => {
         {user_profile?.user?.profile ? (
           <FastImage
             source={{
-              uri: `${URLS.image_url}${user_profile?.user?.profile}`,
+              // uri: `${URLS.image_url}${user_profile?.user?.profile}`,
+              uri: `${STORAGE_URL}${user_profile?.user?.profile}`,
             }}
             style={styles.image}
           />

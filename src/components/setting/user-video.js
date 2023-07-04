@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {mvs} from '../../services/metrices';
-import {URLS} from '../../store/api-urls';
+import {STORAGE_URL, URLS} from '../../store/api-urls';
 import convertToProxyURL from 'react-native-video-cache';
 import {useNavigation} from '@react-navigation/native';
 import Video from 'react-native-video';
@@ -15,7 +15,6 @@ const UserVideo = ({item, showPrivate = true, user_profile, index}) => {
   const {t} = useTranslation();
   const navigation = useNavigation();
   const videoRef = useRef(null);
-  // console.log("user_profile?.videos All Videos of the user: ", user_profile?.videos.length , user_profile?.videos[0]);
   return (
     <TouchableOpacity
       style={styles.photoStyle}
@@ -48,7 +47,8 @@ const UserVideo = ({item, showPrivate = true, user_profile, index}) => {
       <Video
         ref={videoRef}
         source={{
-          uri: convertToProxyURL(`${URLS.image_url}${item?.content?.path}`),
+          // uri: convertToProxyURL(`${URLS.image_url}${item?.content?.path}`),
+          uri: convertToProxyURL(`${STORAGE_URL}${item?.content?.path}`),
         }}
         style={styles.backgroundVideo} 
         muted={true}

@@ -3,7 +3,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import colors from '../../services/colors';
 import {mvs} from '../../services/metrices';
-import {URLS} from '../../store/api-urls';
+import {STORAGE_URL, URLS} from '../../store/api-urls';
 import Bold from '../../typo-graphy/semibold-text';
 import PrimaryButton from '../buttons/primary-button';
 const UserItem = ({style, titleStyle, onClick, item, ...props}) => {
@@ -11,7 +11,8 @@ const UserItem = ({style, titleStyle, onClick, item, ...props}) => {
     <TouchableOpacity style={{...styles.container, ...style}} onPress={onClick}>
       {item?.profile ? (
         <FastImage
-          source={{uri: `${URLS.image_url}${item?.profile}`}}
+          // source={{uri: `${URLS.image_url}${item?.profile}`}}
+          source={{uri: `${STORAGE_URL.image_url}${item?.profile}`}}
           style={styles.imageStyle}
         />
       ) : (

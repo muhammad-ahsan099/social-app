@@ -13,7 +13,7 @@ import APP_API from '../../../../store/api-calls';
 import {styles} from './style';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {CustomHeader} from '../../../../components/molecules/header/header-1x';
-import {URLS} from '../../../../store/api-urls';
+import {STORAGE_URL, URLS} from '../../../../store/api-urls';
 import Row from '../../../../components/atoms/row';
 import {mvs} from '../../../../services/metrices';
 import SemiBold from '../../../../typo-graphy/semibold-text';
@@ -70,7 +70,8 @@ const Subscribe = props => {
           paddingTop: mvs(25),
           opacity: 20,
         }}
-        source={{uri: `${URLS.image_url}${user_profile?.user?.profile}`}}
+        // source={{uri: `${URLS.image_url}${user_profile?.user?.profile}`}}
+        source={{uri: `${STORAGE_URL}${user_profile?.user?.profile}`}}
         opacity={0.25}>
         <CustomHeader title={''} allowBackBtn />
         <ScrollView contentContainerStyle={{flexGrown: 1, flex: 1}}>
@@ -78,7 +79,8 @@ const Subscribe = props => {
             <Row alignItems="center">
               <FastImage
                 source={{
-                  uri: `${URLS.image_url}${user_profile?.user?.profile}`,
+                  // uri: `${URLS.image_url}${user_profile?.user?.profile}`,
+                  uri: `${STORAGE_URL}${user_profile?.user?.profile}`,
                 }}
                 style={styles.image}
               />

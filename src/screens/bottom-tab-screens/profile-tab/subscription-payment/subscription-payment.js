@@ -18,7 +18,7 @@ import {CustomHeader} from '../../../../components/molecules/header/header-1x';
 import SERVICES from '../../../../services/common-services';
 import {mvs} from '../../../../services/metrices';
 import APP_API from '../../../../store/api-calls';
-import {URLS} from '../../../../store/api-urls';
+import {STORAGE_URL, URLS} from '../../../../store/api-urls';
 import Bold from '../../../../typo-graphy/bold-text';
 import Regular from '../../../../typo-graphy/regular-text';
 import SemiBold from '../../../../typo-graphy/semibold-text';
@@ -75,7 +75,8 @@ const SubscriptionPayment = props => {
           <Row alignItems="center">
             <FastImage
               source={{
-                uri: `${URLS.image_url}${user?.profile}`,
+                // uri: `${URLS.image_url}${user?.profile}`,
+                uri: `${STORAGE_URL}${user?.profile}`,
               }}
               style={styles.image}
             />

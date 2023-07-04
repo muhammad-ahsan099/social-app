@@ -1,4 +1,5 @@
 export const IP = 'http://kankiraapp-001-site1.etempurl.com';
+export const STORAGE_URL = `https://kankiracontent.s3.us-east-2.amazonaws.com/`;
 export const URLS = {
   base_url: `${IP}/api/`,
   image_url: `${IP}/UploadedFiles/`,
@@ -57,8 +58,8 @@ export const URLS = {
     search_users: 'user/search-users',
     fetch_users: 'user/search-users?name=',
     profile: 'user/profile/',
-    video: 'http://fcoll242-001-site12.etempurl.com/api/content/content/Video',
-    audio: 'http://fcoll242-001-site12.etempurl.com/api/content/content/Audio',
+    video: 'http://kankiraapp-001-site1.etempurl.com/api/content/content/Video',
+    audio: 'http://kankiraapp-001-site1.etempurl.com/api/content/content/Audio',
     update_interests: 'user/update-interests',
     update_fcm: 'user/update-fcm',
     update_subscription_price: 'user/update-subscription-price',
