@@ -65,9 +65,10 @@ const ActivityTab = props => {
         <PrimaryButton
           onClick={() => onActivity()}
           style={
-            selectedTab == 'activity'
-              ? styles.selectedTabButton
-              : styles.unSelectedTabButton  
+             styles.selectedTabButton
+            // selectedTab == 'activity'
+            //   ? styles.selectedTabButton
+            //   : styles.unSelectedTabButton  
           }
           titleStyle={styles.textStylye}
           title={t('common:activity')}

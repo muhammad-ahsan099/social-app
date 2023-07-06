@@ -297,7 +297,7 @@ const HomeReels = ({ refresh_screen = false, ...props }) => {
           <Drop />
         </TouchableOpacity> */}
       </View>
-      {console.log("Home Videos 0 Index [0]: ", homeVideos)}
+      {/* {console.log("Home Videos 0 Index [0]: ", homeVideos)} */}
       {
         <HomeVideos
           user_info={user_info}

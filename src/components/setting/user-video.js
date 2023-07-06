@@ -11,17 +11,19 @@ import Bold from '../../typo-graphy/bold-text';
 import Regular from '../../typo-graphy/regular-text';
 import colors from '../../services/colors';
 import {useTranslation} from 'react-i18next';
-const UserVideo = ({item, showPrivate = true, user_profile, index}) => {
+const UserVideo = ({item, showPrivate = true, profileVideos, user_profile, index}) => {
   const {t} = useTranslation();
   const navigation = useNavigation();
   const videoRef = useRef(null);
+  // console.log("USER PROFILE AT USER VIDEO PAGE: ", profileVideos);
   return (
     <TouchableOpacity
       style={styles.photoStyle}
       onPress={() =>
         navigation.navigate('UserVideos', {
           currentIndex: index,
-          videos: user_profile?.videos,
+          // videos: user_profile?.videos,
+          videos: profileVideos,
         })
       }>
       {showPrivate == true && item?.content?.viewerType == 'Private' && (

@@ -33,7 +33,9 @@ const UserReelsComponent = ({
       id: item?.content?.userId,
     });
   };
-  const renderItem = ({item, index}) => (
+  const renderItem = ({item, index}) => {
+    console.log("Index: ", index, "Current Index: ", currentIndex);
+    return(
     <UserSingleReel
       item={item?.content}
       index={index}
@@ -54,7 +56,7 @@ const UserReelsComponent = ({
       onSubscribePress={() => subscribe(item)}
       isFocus={isFocus}
     />
-  );
+  )};
   return (
     <SwiperFlatList
       vertical={true}

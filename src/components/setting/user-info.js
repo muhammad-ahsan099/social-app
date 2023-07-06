@@ -14,7 +14,7 @@ const UserInfo = ({user_profile = {}}) => {
   const {t} = useTranslation();
   return (
     <View style={styles.container}>
-      <Row style={{paddingTop: mvs(0)}} alignItems="center">
+      <Row style={{paddingTop: mvs(0),  justifyContent: 'space-between'}} alignItems="center">
         {user_profile?.user?.profile ? (
           <FastImage
             source={{
@@ -38,6 +38,7 @@ const UserInfo = ({user_profile = {}}) => {
           <SemiBold size={mvs(12)} label={user_profile?.user?.followers} />
           <Medium size={mvs(12)} label={t('common:followers')} />
         </View> */}
+        <View style={styles.empty_view}></View>
       </Row>
 
       <View style={{paddingTop: mvs(10)}}>
@@ -87,4 +88,8 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: colors.white,
   },
+  empty_view: {
+    height: mvs(70),
+    width: mvs(70),
+  }
 });

@@ -27,7 +27,7 @@ export const Styles = StyleSheet.create({
   },
   selectedTabButton: {
     backgroundColor: colors.lightgrey1,
-    width: '50%',
+    width: '100%',
     borderRadius: 7,
     height: mvs(32),
     marginTop: 0,

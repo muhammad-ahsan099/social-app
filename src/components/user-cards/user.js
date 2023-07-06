@@ -12,7 +12,7 @@ const UserItem = ({style, titleStyle, onClick, item, ...props}) => {
       {item?.profile ? (
         <FastImage
           // source={{uri: `${URLS.image_url}${item?.profile}`}}
-          source={{uri: `${STORAGE_URL.image_url}${item?.profile}`}}
+          source={{uri: `${STORAGE_URL}${item?.profile}`}}
           style={styles.imageStyle}
         />
       ) : (

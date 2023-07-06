@@ -89,6 +89,7 @@ const ReelsComponent = ({
       user_info,
     ],
   );
+  // console.log("scrollToIndex value  at Reels Component:", currentIndex);
 
   return (
     <SwiperFlatList

@@ -40,6 +40,7 @@ const UserReels = props => {
     unlike_content,
   } = props;
   const {currentIndex, videos} = route.params;
+  console.log("Receive Current Index: ", currentIndex, "Videos Length from Params: ", videos?.length);
   const [userVideos, setVideos] = useState(videos);
   const [newComment, setNewComment] = React.useState(false);
   const [shareModal, setShareModal] = useState(false);

@@ -126,11 +126,11 @@ const ProfileTab = props => {
             style={photos ? styles.active : styles.inactive}>
             <Photos />
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => setPhotos(false)}
             style={photos ? styles.inactive : styles.active}>
             <Music />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
       {photos ? (
@@ -165,6 +165,7 @@ const ProfileTab = props => {
                   showPrivate={false}
                   item={item}
                   user_profile={user_profile}
+                  profileVideos={profileVideos?.results}
                   key={index}
                   index={index}
                 />

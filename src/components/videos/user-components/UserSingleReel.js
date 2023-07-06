@@ -61,12 +61,14 @@ const UserSingleReel = ({
   const onError = error => {
     console.log('error', error);
   };
-  const onLoadComplete = event => {};
+  const onLoadComplete = event => {
+
+  };
   //console.log("Video Url--->",`${URLS.image_url}${item?.path}`)
   return item?.viewerType == 'Private' &&
     item?.userId != user_info?.id &&
-    // isSubscribed == false ? (
-    isSubscribed == false || isExpiredSubscription == true ? (
+    isSubscribed == false ? (
+    // isSubscribed == false || isExpiredSubscription == true ? (
     <View style={styles.container}>
       <TouchableOpacity
         activeOpacity={0.98}
@@ -137,7 +139,8 @@ const UserSingleReel = ({
     </View>
   ) : (
     <View style={styles.container}>
-      {loading && item?.type == content_types.video && (
+      {/* {loading && item?.type == content_types.video && ( */}
+      {true && (
         <BarIndicator
           color={colors.primary}
           size={40}
@@ -153,7 +156,7 @@ const UserSingleReel = ({
           height: '100%',
           position: 'absolute',
         }}>
-        {item?.type == content_types.video ? (
+        {/* {item?.type == content_types.video ? (
           <Video
             videoRef={videoRef}
             onBuffer={onBuffer}
@@ -193,7 +196,7 @@ const UserSingleReel = ({
             source={{uri: `${STORAGE_URL}${item?.path}`}}
             style={{...styles.content, zIndex: 0}}
           />
-        )}
+        )} */}
       </TouchableOpacity>
       <View style={styles.bottom_user_view}>
         <View style={{}}>
