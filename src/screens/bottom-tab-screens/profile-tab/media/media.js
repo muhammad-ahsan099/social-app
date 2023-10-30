@@ -9,7 +9,7 @@ import Video from 'react-native-video';
 import {mvs} from '../../../../services/metrices';
 import {PlayBank} from '../../../../assets/svgs';
 import Row from '../../../../components/atoms/row';
-import {URLS} from '../../../../store/api-urls';
+import {STORAGE_URL, URLS} from '../../../../store/api-urls';
 import Regular from '../../../../typo-graphy/regular-text';
 import SERVICES from '../../../../services/common-services';
 
@@ -35,7 +35,8 @@ const Media = props => {
             <TouchableOpacity key={index} style={styles.videItem}>
               <Video
                 ref={videoRef}
-                source={{uri: `${URLS.image_url}${item.path}`}}
+                // source={{uri: `${URLS.image_url}${item.path}`}}
+                source={{uri: `${STORAGE_URL}${item.path}`}}
                 style={styles.backgroundVideo}
                 muted={true}
                 repeat={false}

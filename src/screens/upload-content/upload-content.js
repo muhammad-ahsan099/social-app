@@ -15,6 +15,8 @@ import PrimaryDropdown from '../../components/modals/primary-dropdown';
 import { connect } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import SERVICES from '../../services/common-services';
+import Video from 'react-native-video';
+import RNFS from 'react-native-fs';
 import { useTranslation } from 'react-i18next';
 import CustomAlertModal from '../../components/modals/custom-alert';
 import BecomeCreatorModal from '../../components/modals/become-creator-modal';
@@ -25,10 +27,12 @@ const UploadContent = props => {
   const uploadContentText = t(`common:uploadContent`);
   const selectViewerTypeText = t(`common:selectViewerType`);
   const selectContentText = t(`common:selectContent`);
+  const selectVideoDurationText = t(`common:selectVideoDuration`);
   const contentUploadedSuccessfully = t(`common:contentUploadedSuccessfully`);
 
   const { navigation, upload_content, user_info, route } = props;
   const [spinner, setSpinner] = React.useState(false);
+  const [duration, setDuration] = useState(null)
   const [payload, setPayload] = React.useState({
     Amount: '0',
     ViewerType: 'Public',
@@ -76,6 +80,11 @@ const UploadContent = props => {
       Alert.alert(uploadContentText, selectContentText);
       return;
     }
+    if (duration > 30) {
+      Alert.alert(uploadContentText, selectVideoDurationText);
+      return;
+
+    }
     if (payload?.ViewerType.length < 1) {
       Alert.alert(uploadContentText, selectViewerTypeText);
       return;
@@ -85,6 +94,7 @@ const UploadContent = props => {
     setSpinner(false);
     if (res?.data?.succeeded == true) {
       //Alert.alert(uploadContentText, contentUploadedSuccessfully);
+      setDuration(null)
       setVisible(true);
     } else if (res?.response?.data?.Message) {
       if (res?.response?.data?.Message?.includes('You are not creator')) {
@@ -95,6 +105,12 @@ const UploadContent = props => {
       Alert.alert(uploadContentText, res?.data?.message);
     }
   };
+
+  const handleVideoLoad = async (event) => {
+    const videoDuration = event.duration;
+    setDuration(videoDuration)
+  };
+
 
   return (
     <View style={{ ...styles.container }}>
@@ -113,11 +129,19 @@ const UploadContent = props => {
                 />
               </>
             ) : (
-              <Image
-                source={{ uri: payload.ContentFile.uri }}
-                style={{ width: '100%', height: '100%', borderRadius: mvs(15) }}
-                resizeMode="cover"
-              />
+              payload.ContentFile.type.startsWith('image') ?
+                (
+                  <Image
+                    source={{ uri: payload.ContentFile.uri }}
+                    style={{ width: '100%', height: '100%', borderRadius: mvs(15) }}
+                    resizeMode="cover"
+                  />) : (
+                  <Video
+                    source={{ uri: payload.ContentFile.uri }}
+                    style={{ width: '100%', height: '100%', borderRadius: mvs(15) }}
+                    onLoad={(event) => handleVideoLoad(event)}
+                  />
+                )
             )}
           </TouchableOpacity>
           <View style={{ marginTop: mvs(42) }}>

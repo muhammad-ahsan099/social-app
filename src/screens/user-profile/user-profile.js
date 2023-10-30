@@ -10,6 +10,7 @@ import {
   View,
   ToastAndroid,
   Alert,
+  Text,
 } from 'react-native';
 import { connect } from 'react-redux';
 import APP_API from '../../store/api-calls';
@@ -28,7 +29,7 @@ import colors from '../../services/colors';
 import AudioItem from '../../components/music/audio';
 import ProfileMenu from '../../components/setting/menu';
 import Video from 'react-native-video';
-import { URLS } from '../../store/api-urls';
+import { STORAGE_URL, URLS } from '../../store/api-urls';
 import ReportModal from '../../components/molecules/modals/report-modal';
 import Bold from '../../typo-graphy/bold-text';
 import SERVICES from '../../services/common-services';
@@ -257,11 +258,11 @@ const UserProfile = props => {
                 style={photos ? styles.active : styles.inactive}>
                 <Photos />
               </TouchableOpacity>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 onPress={() => setPhotos(false)}
                 style={photos ? styles.inactive : styles.active}>
                 <Music />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
           </View>
           {photos ? (
@@ -286,17 +287,21 @@ const UserProfile = props => {
                       }
                       viewerType={item?.content?.viewerType}
                       key={index}
-                      imageUrl={`${URLS.image_url}${item?.content?.path}`}
+                      // imageUrl={`${URLS.image_url}${item?.content?.path}`}
+                      imageUrl={`${STORAGE_URL}${item?.content?.path}`}
                       onClick={() =>
-                        showFullImage(`${URLS.image_url}${item?.content?.path}`)
+                        // showFullImage(`${URLS.image_url}${item?.content?.path}`)
+                        showFullImage(`${STORAGE_URL}${item?.content?.path}`)
                       }
                     />
                   ) : (
+                    // <Text style={{color: '#fff', fontSize: 16}}>User Videos....</Text>
                     <UserVideo
                       showPrivate={
                         user_profile?.isSubscribedByMe ? false : true
                       }
                       item={item}
+                      profileVideos={profileVideos?.results}
                       user_profile={user_profile}
                       key={index}
                       index={index}

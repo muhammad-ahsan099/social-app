@@ -73,6 +73,7 @@ export default {
   public: 'Public',
   uploadContent: 'Upload Content',
   selectContent: 'Select Content',
+  selectVideoDuration: 'Sorry! Video less be 30 sec',
   selectViewerType: 'Select Viewer Type',
   contentUploadedSuccessfully: 'Content Uploaded Successfully',
   chooseFromGallery: 'Choose From Gallery',

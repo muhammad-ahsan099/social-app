@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {mvs} from '../../../services/metrices';
-import {URLS} from '../../../store/api-urls';
+import {STORAGE_URL, URLS} from '../../../store/api-urls';
 import Regular from '../../../typo-graphy/regular-text';
 import Row from '../../atoms/row';
 import moment from 'moment';
@@ -19,7 +19,8 @@ const UserInfoHeader = ({
       <Row alignItems="center" style={{justifyContent: 'flex-start'}}>
         {userImage ? (
           <FastImage
-            source={{uri: `${URLS.image_url}${userImage}`}}
+            // source={{uri: `${URLS.image_url}${userImage}`}}
+            source={{uri: `${STORAGE_URL}${userImage}`}}
             style={styles.image}
           />
         ) : (

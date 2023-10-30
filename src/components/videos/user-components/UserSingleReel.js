@@ -15,7 +15,7 @@ import {Delete, SuperFan} from '../../../assets/svgs';
 import colors from '../../../services/colors';
 import SERVICES from '../../../services/common-services';
 import {mvs} from '../../../services/metrices';
-import {URLS} from '../../../store/api-urls';
+import {STORAGE_URL, URLS} from '../../../store/api-urls';
 import Bold from '../../../typo-graphy/bold-text';
 import IconTitle from '../../icon-title';
 import {content_types} from '../../../store/constant-data';
@@ -61,11 +61,14 @@ const UserSingleReel = ({
   const onError = error => {
     console.log('error', error);
   };
-  const onLoadComplete = event => {};
+  const onLoadComplete = event => {
+
+  };
   //console.log("Video Url--->",`${URLS.image_url}${item?.path}`)
   return item?.viewerType == 'Private' &&
     item?.userId != user_info?.id &&
-    isSubscribed == false || !isExpiredSubscription ? (
+    isSubscribed == false ? (
+    // isSubscribed == false || isExpiredSubscription == true ? (
     <View style={styles.container}>
       <TouchableOpacity
         activeOpacity={0.98}
@@ -95,7 +98,8 @@ const UserSingleReel = ({
             playWhenInactive={false}
             resizeMode="cover"
             paused={true}
-            source={{uri: convertToProxyURL(`${URLS.image_url}${item?.path}`)}}
+            // source={{uri: convertToProxyURL(`${URLS.image_url}${item?.path}`)}}
+            source={{uri: convertToProxyURL(`${STORAGE_URL}${item?.path}`)}}
             muted={false}
             style={{
               width: '100%',
@@ -106,7 +110,8 @@ const UserSingleReel = ({
           />
         ) : (
           <FastImage
-            source={{uri: `${URLS.image_url}${item?.path}`}}
+            // source={{uri: `${URLS.image_url}${item?.path}`}}
+            source={{uri: `${STORAGE_URL}${item?.path}`}}
             style={styles.content}
           />
         )}
@@ -118,7 +123,8 @@ const UserSingleReel = ({
               style={{width: 150, flexDirection: 'row', alignItems: 'center'}}>
               <View style={styles.profile_view}>
                 <FastImage
-                  source={{uri: `${URLS.image_url}${userImage}`}}
+                  // source={{uri: `${URLS.image_url}${userImage}`}}
+                  source={{uri: `${STORAGE_URL}${userImage}`}}
                   style={styles.profile}
                 />
               </View>
@@ -133,7 +139,8 @@ const UserSingleReel = ({
     </View>
   ) : (
     <View style={styles.container}>
-      {loading && item?.type == content_types.video && (
+      {/* {loading && item?.type == content_types.video && ( */}
+      {true && (
         <BarIndicator
           color={colors.primary}
           size={40}
@@ -149,7 +156,7 @@ const UserSingleReel = ({
           height: '100%',
           position: 'absolute',
         }}>
-        {item?.type == content_types.video ? (
+        {/* {item?.type == content_types.video ? (
           <Video
             videoRef={videoRef}
             onBuffer={onBuffer}
@@ -168,7 +175,8 @@ const UserSingleReel = ({
                 ? false
                 : true
             }
-            source={{uri: convertToProxyURL(`${URLS.image_url}${item?.path}`)}}
+            // source={{uri: convertToProxyURL(`${URLS.image_url}${item?.path}`)}}
+            source={{uri: convertToProxyURL(`${STORAGE_URL}${item?.path}`)}}
             muted={false}
             style={{
               width: '100%',
@@ -184,10 +192,11 @@ const UserSingleReel = ({
           />
         ) : (
           <FastImage
-            source={{uri: `${URLS.image_url}${item?.path}`}}
+            // source={{uri: `${URLS.image_url}${item?.path}`}}
+            source={{uri: `${STORAGE_URL}${item?.path}`}}
             style={{...styles.content, zIndex: 0}}
           />
-        )}
+        )} */}
       </TouchableOpacity>
       <View style={styles.bottom_user_view}>
         <View style={{}}>
@@ -196,7 +205,8 @@ const UserSingleReel = ({
               style={{width: 150, flexDirection: 'row', alignItems: 'center'}}>
               <View style={styles.profile_view}>
                 <FastImage
-                  source={{uri: `${URLS.image_url}${userImage}`}}
+                  // source={{uri: `${URLS.image_url}${userImage}`}}
+                  source={{uri: `${STORAGE_URL}${userImage}`}}
                   style={styles.profile}
                 />
               </View>

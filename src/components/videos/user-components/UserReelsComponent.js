@@ -33,14 +33,16 @@ const UserReelsComponent = ({
       id: item?.content?.userId,
     });
   };
-  const renderItem = ({item, index}) => (
+  const renderItem = ({item, index}) => {
+    console.log("Index: ", index, "Current Index: ", currentIndex);
+    return(
     <UserSingleReel
       item={item?.content}
       index={index}
       user_info={user_info}
       isLikeByMe={item?.isLikeByMe}
       isSavedByMe={item?.isSavedByMe}
-      isExpiredSubscriptions={item?.content?.isExpired}
+      isExpiredSubscriptions={item?.isExpired}
       isSubscribedByMe={item?.isSubscribedByMe}
       userImage={item?.userImage}
       userName={item?.userName}
@@ -54,7 +56,7 @@ const UserReelsComponent = ({
       onSubscribePress={() => subscribe(item)}
       isFocus={isFocus}
     />
-  );
+  )};
   return (
     <SwiperFlatList
       vertical={true}

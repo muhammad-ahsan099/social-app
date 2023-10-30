@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {mvs} from '../../services/metrices';
-import {URLS} from '../../store/api-urls';
+import {STORAGE_URL, URLS} from '../../store/api-urls';
 import convertToProxyURL from 'react-native-video-cache';
 import {useNavigation} from '@react-navigation/native';
 import Video from 'react-native-video';
@@ -11,18 +11,19 @@ import Bold from '../../typo-graphy/bold-text';
 import Regular from '../../typo-graphy/regular-text';
 import colors from '../../services/colors';
 import {useTranslation} from 'react-i18next';
-const UserVideo = ({item, showPrivate = true, user_profile, index}) => {
+const UserVideo = ({item, showPrivate = true, profileVideos, user_profile, index}) => {
   const {t} = useTranslation();
   const navigation = useNavigation();
   const videoRef = useRef(null);
-  console.log("user_profile?.videos All Videos of the user: ", user_profile?.videos.length , user_profile?.videos[0]);
+  // console.log("USER PROFILE AT USER VIDEO PAGE: ", profileVideos);
   return (
     <TouchableOpacity
       style={styles.photoStyle}
       onPress={() =>
         navigation.navigate('UserVideos', {
           currentIndex: index,
-          videos: user_profile?.videos,
+          // videos: user_profile?.videos,
+          videos: profileVideos,
         })
       }>
       {showPrivate == true && item?.content?.viewerType == 'Private' && (
@@ -48,7 +49,8 @@ const UserVideo = ({item, showPrivate = true, user_profile, index}) => {
       <Video
         ref={videoRef}
         source={{
-          uri: convertToProxyURL(`${URLS.image_url}${item?.content?.path}`),
+          // uri: convertToProxyURL(`${URLS.image_url}${item?.content?.path}`),
+          uri: convertToProxyURL(`${STORAGE_URL}${item?.content?.path}`),
         }}
         style={styles.backgroundVideo} 
         muted={true}

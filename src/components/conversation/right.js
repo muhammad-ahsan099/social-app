@@ -6,7 +6,7 @@ import convertToProxyURL from 'react-native-video-cache';
 import {Play} from '../../assets/svgs';
 import colors from '../../services/colors';
 import {mvs} from '../../services/metrices';
-import {URLS} from '../../store/api-urls';
+import {STORAGE_URL, URLS} from '../../store/api-urls';
 import Regular from '../../typo-graphy/regular-text';
 import Row from '../atoms/row';
 const Right = ({
@@ -32,7 +32,8 @@ const Right = ({
           style={styles.videoItem}
           onPress={() => setPlaying(!isplaying)}>
           <Video
-            source={{uri: convertToProxyURL(`${URLS.image_url}${messageFile}`)}}
+            // source={{uri: convertToProxyURL(`${URLS.image_url}${messageFile}`)}}
+            source={{uri: convertToProxyURL(`${STORAGE_URL}${messageFile}`)}}
             style={styles.backgroundVideo}
             muted={!isplaying}
             repeat={false}

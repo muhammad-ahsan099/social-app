@@ -4,7 +4,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import colors from '../../services/colors';
 import {mvs} from '../../services/metrices';
-import {URLS} from '../../store/api-urls';
+import {STORAGE_URL, URLS} from '../../store/api-urls';
 import Regular from '../../typo-graphy/regular-text';
 import SemiBold from '../../typo-graphy/semibold-text';
 import Row from '../atoms/row';
@@ -28,7 +28,8 @@ const SearchItem = ({
       <Row alignItems="center">
         <FastImage
           resizeMode="cover"
-          source={{uri: `${URLS.image_url}${imageUrl}`}}
+          // source={{uri: `${URLS.image_url}${imageUrl}`}}
+          source={{uri: `${STORAGE_URL}${imageUrl}`}}
           style={{...styles.image, ...imageStyle}}
         />
         <View style={{...styles.info}}>

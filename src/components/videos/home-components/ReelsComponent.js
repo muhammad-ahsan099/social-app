@@ -60,7 +60,7 @@ const ReelsComponent = ({
           index={index}
           isLikeByMe={item?.isLikeByMe}
           isSavedByMe={item?.isSavedByMe}
-          isExpiredSubscriptions={item?.content?.isExpired}
+          isExpiredSubscriptions={item?.isExpired}
           isSubscribedByMe={item?.isSubscribedByMe}
           userImage={item?.userImage}
           userName={item?.userName}
@@ -89,6 +89,7 @@ const ReelsComponent = ({
       user_info,
     ],
   );
+  // console.log("scrollToIndex value  at Reels Component:", currentIndex);
 
   return (
     <SwiperFlatList
